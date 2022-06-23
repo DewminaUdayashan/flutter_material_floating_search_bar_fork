@@ -105,6 +105,7 @@ class _HomeState extends State<Home> {
 
     return Consumer<SearchModel>(
       builder: (context, model, _) => FloatingSearchBar(
+        onBackdropTap: () {},
         automaticallyImplyBackButton: false,
         controller: controller,
         clearQueryOnClose: true,
@@ -363,6 +364,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FloatingSearchBar(
+        onBackdropTap: () {},
         controller: controller,
         title: Text(
           "Aschaffenburg",
