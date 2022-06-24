@@ -167,7 +167,7 @@ class FloatingSearchBar extends ImplicitlyAnimatedWidget {
   /// When not specified, defaults to `true`.
   final bool closeOnBackdropTap;
 
-  final Function onBackdropTap;
+  final Function? onClose;
 
   /// {@template floating_search_bar.progress}
   /// The progress of the [LinearProgressIndicator] inside the bar.
@@ -373,7 +373,7 @@ class FloatingSearchBar extends ImplicitlyAnimatedWidget {
     this.automaticallyImplyDrawerHamburger = true,
     this.automaticallyImplyBackButton = true,
     this.closeOnBackdropTap = true,
-    required this.onBackdropTap,
+    this.onClose,
     this.progress = false,
     this.transitionDuration = const Duration(milliseconds: 500),
     this.transitionCurve = Curves.ease,
@@ -544,6 +544,9 @@ class FloatingSearchBarState extends ImplicitlyAnimatedWidgetState<
   }
 
   void _onClosed() {
+    if (widget.onClose != null) {
+      widget.onClose!();
+    }
     _offset = 0.0;
 
     if (!widget.isScrollControlled) {
@@ -835,7 +838,6 @@ class FloatingSearchBarState extends ImplicitlyAnimatedWidgetState<
       child: GestureDetector(
         onTap: () {
           if (widget.closeOnBackdropTap) {
-            widget.onBackdropTap();
             close();
           }
         },
